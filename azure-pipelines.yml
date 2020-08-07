@@ -10,6 +10,22 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: ls
-  displayName: 'Validate checkout'
-
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8'
+  displayName: 'Install Python 3.8'
+- script: pip install bridgecrew
+  displayName: 'Install the Bridgecrew CLI'
+- script: bridgecrew -d storage
+  displayName: 'Scan with Bridgecrew'
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'arm-service-connection'
+    subscriptionId: '6e1d96d8-e736-4089-a694-908b1f5ceea2'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'rg1'
+    location: 'East US'
+    templateLocation: 'Linked artifact'
+    csmFile: 'storage/storage.json'
+    deploymentMode: 'Incremental'
