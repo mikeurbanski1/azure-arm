@@ -16,8 +16,6 @@ steps:
   inputs:
     versionSpec: '3.8'
   displayName: 'Install Python 3.8'
-- script: cat storage/storage.json
-  displayName: 'cat'
 - script: pip install bridgecrew
   displayName: 'Install the Bridgecrew CLI'
 - script: bridgecrew -d storage --soft-fail
