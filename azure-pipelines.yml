@@ -4,7 +4,9 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  paths:
+    include:
+      - storage/*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -16,7 +18,7 @@ steps:
   displayName: 'Install Python 3.8'
 - script: pip install bridgecrew
   displayName: 'Install the Bridgecrew CLI'
-- script: bridgecrew -d storage
+- script: bridgecrew -d storage --soft-fail
   displayName: 'Scan with Bridgecrew'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
