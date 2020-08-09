@@ -15,7 +15,6 @@ variables:
 - group: vars1
 
 steps:
-- script: echo $(BC_API_KEY)
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.8'
