@@ -16,9 +16,13 @@
       "location": "[parameters('location')]",
       "properties": {
         "accessTier": "Hot",
-        "minimumTlsVersion": "TLS1_1",
-        "supportsHttpsTrafficOnly": "false",
-        "allowBlobPublicAccess": "true"
+        "minimumTlsVersion": "TLS1_2",
+        "supportsHttpsTrafficOnly": "true",
+        "allowBlobPublicAccess": "true",
+        "networkAcls": {
+          "defaultAction": "Deny",
+          "bypass": "AzureServices"
+        }
       },
       "dependsOn": [],
       "sku": {
@@ -32,7 +36,7 @@
           "apiVersion": "2019-06-01",
           "name": "default/bcazrcontainer1",
           "properties": {
-            "publicAccess": "Container"
+            "publicAccess": "Private"
           },
           "dependsOn": [
             "bcazrstorage1"
