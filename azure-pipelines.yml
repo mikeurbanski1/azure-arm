@@ -18,7 +18,8 @@ steps:
   displayName: 'Install Python 3.8'
 - script: pip install bridgecrew
   displayName: 'Install the Bridgecrew CLI'
-- script: bridgecrew -d storage --soft-fail
+- script: echo $BC_API_KEY
+- script: bridgecrew -d storage
   displayName: 'Scan with Bridgecrew'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
