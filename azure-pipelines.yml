@@ -12,10 +12,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - bash: |
+- bash: |
     echo "$BC_API_KEY"
   env:
     BC_API_KEY: $(BC_API_KEY)
+      
 # - task: UsePythonVersion@0
 #   inputs:
 #     versionSpec: '3.8'
