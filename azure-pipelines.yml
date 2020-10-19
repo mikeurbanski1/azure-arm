@@ -21,15 +21,15 @@ steps:
   displayName: 'Install Python 3.8'
 - script: pip install bridgecrew
   displayName: 'Install the Bridgecrew CLI'
-- script: bridgecrew -d storage --soft-fail
+- script: bridgecrew -d storage
   displayName: 'Scan with Bridgecrew'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
     azureResourceManagerConnection: 'arm-service-connection'
-    subscriptionId: '6e1d96d8-e736-4089-a694-908b1f5ceea2'
+    subscriptionId: '69a2258c-8778-4d42-9ea7-6b65af91ffc3'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'rg1'
+    resourceGroupName: 'bcazr3'
     location: 'East US'
     templateLocation: 'Linked artifact'
     csmFile: 'storage/storage.json'
