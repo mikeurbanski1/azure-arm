@@ -23,6 +23,8 @@ steps:
   displayName: 'Install the Bridgecrew CLI'
 - script: bridgecrew -d storage --bc-api-key $BC_API_KEY --repo-id mikeubanski1/azure-arm --branch master
   displayName: 'Scan with Bridgecrew'
+  env:
+    BC_API_KEY: $(BC_API_KEY)
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
