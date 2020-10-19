@@ -19,7 +19,7 @@ steps:
 - script: pip install bridgecrew
   displayName: 'Install the Bridgecrew CLI'
 - bash: |
-    bridgecrew -d storage --bc-api-key $BC_API_KEY --repo-id mikeubanski1/azure-arm --branch master
+    bridgecrew -d storage --bc-api-key $BC_API_KEY --repo-id bridgecrew/azure-arm --branch master
   displayName: 'Scan with Bridgecrew'
   env:
     BC_API_KEY: $(BC_API_KEY)
