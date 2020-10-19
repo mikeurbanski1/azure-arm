@@ -12,29 +12,25 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8'
+  displayName: 'Install Python 3.8'
+- script: pip install bridgecrew
+  displayName: 'Install the Bridgecrew CLI'
 - bash: |
-    echo "$BC_API_KEY"
+    bridgecrew -d storage --bc-api-key $BC_API_KEY --repo-id mikeubanski1/azure-arm --branch master
+  displayName: 'Scan with Bridgecrew'
   env:
     BC_API_KEY: $(BC_API_KEY)
-      
-# - task: UsePythonVersion@0
-#   inputs:
-#     versionSpec: '3.8'
-#   displayName: 'Install Python 3.8'
-# - script: pip install bridgecrew
-#   displayName: 'Install the Bridgecrew CLI'
-# - script: bridgecrew -d storage --bc-api-key $BC_API_KEY --repo-id mikeubanski1/azure-arm --branch master
-#   displayName: 'Scan with Bridgecrew'
-#   env:
-#     BC_API_KEY: $(BC_API_KEY)
-# - task: AzureResourceManagerTemplateDeployment@3
-#   inputs:
-#     deploymentScope: 'Resource Group'
-#     azureResourceManagerConnection: 'arm-service-connection'
-#     subscriptionId: '69a2258c-8778-4d42-9ea7-6b65af91ffc3'
-#     action: 'Create Or Update Resource Group'
-#     resourceGroupName: 'bcazr3'
-#     location: 'East US'
-#     templateLocation: 'Linked artifact'
-#     csmFile: 'storage/storage.json'
-#     deploymentMode: 'Incremental'
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'arm-service-connection'
+    subscriptionId: '69a2258c-8778-4d42-9ea7-6b65af91ffc3'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'bcazr3'
+    location: 'East US'
+    templateLocation: 'Linked artifact'
+    csmFile: 'storage/storage.json'
+    deploymentMode: 'Incremental'
